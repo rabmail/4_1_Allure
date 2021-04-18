@@ -1,6 +1,10 @@
 package ru.netology;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import lombok.SneakyThrows;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
@@ -20,6 +24,14 @@ public class TestApp {
     void shouldOpenWebApp() {
         open("http://localhost:9999");
     }
+
+    @BeforeAll
+    static void setUpAll(){
+        SelenideLogger.addListener("allure", new AllureSelenide());}
+
+
+        @AfterAll
+        static void tearDownAll(){SelenideLogger.removeListener("allure");}
 
     @SneakyThrows
     @Test
